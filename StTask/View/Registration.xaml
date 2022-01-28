@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behav="clr-namespace:StTask.Behaviors" xmlns:converter="clr-namespace:StTask.Converters"
+    x:Class="StTask.View.Registration">
+        <ContentPage.Resources>
+         <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Frame Margin="10" VerticalOptions="CenterAndExpand" CornerRadius="10">
+            <StackLayout>
+            <Entry Visual="Material" Text="{Binding Email.Value}" Placeholder="Email or Mobile Number">
+                <Entry.Behaviors>
+                        <behav:EntryLineValidationBehaviour IsValid="{Binding Email.IsValid, Mode=TwoWay}"/>
+                </Entry.Behaviors>
+            </Entry>
+   <Label Text="{Binding Email.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Email.IsValid, Mode=TwoWay, Converter={StaticResource InverseBoolConverter}}"
+                         />
+             <Entry Visual="Material" Placeholder="FullName"></Entry>
+            <Entry Visual="Material" Text="{Binding Password.Item1.Value}" Placeholder="Password">
+                <Entry.Behaviors>
+                        <behav:EntryLineValidationBehaviour IsValid="{Binding Password.Item1.IsValid, Mode=TwoWay}"/>
+                </Entry.Behaviors>
+            </Entry>
+   <Label Text="{Binding Password.Item1.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Password.Item1.IsValid, Mode=TwoWay, Converter={StaticResource InverseBoolConverter}}"
+                         />
+            <Entry Visual="Material" Text="{Binding Password.Item2.Value}" Placeholder="Confirm Password">
+ <Entry.Behaviors>
+
+     <behav:EntryLineValidationBehaviour IsValid="{Binding Password.Item2.IsValid, Mode=TwoWay}"/>
+
+ </Entry.Behaviors>
+            </Entry>
+   <Label Text="{Binding Password.Item2.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Password.Item2.IsValid, Mode=TwoWay, Converter={StaticResource InverseBoolConverter}}"
+                         />
+                <Entry Visual="Material" Text="{Binding YearOfBirth.Value}" Placeholder="Year Of Birth">
+                <Entry.Behaviors>
+                        <behav:EntryLineValidationBehaviour IsValid="{Binding YearOfBirth.IsValid, Mode=TwoWay}"/>
+                </Entry.Behaviors>
+            </Entry>
+   <Label Text="{Binding YearOfBirth.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding YearOfBirth.IsValid, Mode=TwoWay, Converter={StaticResource InverseBoolConverter}}"
+                         />
+             <Button Text="signup" Command="{Binding SignUpCommand}"></Button>
+</StackLayout>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

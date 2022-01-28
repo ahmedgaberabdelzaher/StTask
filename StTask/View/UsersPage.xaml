@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+     xmlns:prism="http://prismlibrary.com"
+    xmlns:panck="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="StTask.View.UsersPage">
+   
+    <ContentPage.Behaviors>
+        <prism:EventToCommandBehavior EventName="Appearing" Command="{Binding FetchUsersDataCommand}">
+
+        </prism:EventToCommandBehavior>
+    </ContentPage.Behaviors>
+    <ContentPage.Content>
+        <StackLayout>
+            <panck:PancakeView CornerRadius="10,10,0,0" BackgroundColor="Red">
+                            <Label Margin="10" FontSize="Title" TextColor="White" Text="List of users" HorizontalOptions="CenterAndExpand"></Label>
+
+            </panck:PancakeView>
+            <CollectionView ItemsSource="{Binding UsersLst}"
+                            SelectionMode="Single" SelectedItem="{Binding SelectedUser}"
+                            SelectionChangedCommand="{Binding UserSelctionChangedCommand}"
+                         >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                       
+                            <Frame>
+                                <Grid RowDefinitions="auto,*" ColumnDefinitions="auto,*">
+                                     <Frame CornerRadius="30" Grid.Row="0" VerticalOptions="Center" Grid.Column="0" Grid.RowSpan="2"
+           HeightRequest="60"
+           WidthRequest="60"
+           HorizontalOptions="Center"
+           Padding="0"
+           IsClippedToBounds="True">
+        <Image HeightRequest="25" WidthRequest="25" Source="{Binding Avatar}" 
+          />
+                                         </Frame>
+                                    <Label FontSize="Title" TextColor="Black" Grid.Column="1" Grid.Row="0">
+                                       <Label.Text>
+             <MultiBinding StringFormat="{}{0} {1}">
+            <Binding Path="first_name" />
+                             <Binding Path="last_name" />
+
+        </MultiBinding>
+                                       </Label.Text>
+                                    </Label>
+                              <Label Text="{Binding Email}" FontSize="Subtitle" Grid.Column="1" Grid.Row="1"></Label>
+                                </Grid>
+                            </Frame>
+                      
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

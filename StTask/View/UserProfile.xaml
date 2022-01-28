@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="StTask.View.UserProfile">
+   <NavigationPage.TitleView>
+       <Label Text="Personal Data" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="#25486b" FontAttributes="Bold"></Label>
+   </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+           
+            <Frame Margin="0,20,0,10" HorizontalOptions="Center" CornerRadius="10" 
+           Padding="0"
+           IsClippedToBounds="True">
+        <Image HeightRequest="130" WidthRequest="130" Source="{Binding SelectedUser.Avatar}" 
+           HorizontalOptions="Center"
+           VerticalOptions="Center" />
+    </Frame>
+            <StackLayout>
+                <StackLayout.Resources>
+                    <ResourceDictionary>
+                        <Style TargetType="Frame">
+                            <Setter Property="BackgroundColor" Value="#f1f3fd"></Setter>
+                            <Setter Property="HasShadow" Value="False"></Setter>
+                                                        <Setter Property="CornerRadius" Value="15"></Setter>
+
+                        </Style>
+                    </ResourceDictionary>
+                </StackLayout.Resources>
+                <Label Text="Email" TextColor="#a1b0bf"></Label>
+                <Frame>
+                    <Label Text="{Binding SelectedUser.Email}"></Label>
+                </Frame>
+                  <Label Text="Full Name" TextColor="#a1b0bf"></Label>
+                <Frame >
+                    <Label >
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+            <Binding Path="SelectedUser.first_name" />
+                             <Binding Path="SelectedUser.last_name" />
+
+        </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                </Frame>
+                    <Label Text="Year Of Birth"  TextColor="#a1b0bf"></Label>
+                <Frame>
+                    <Label Text="{Binding BirthandGenderObject.BirthDate}"></Label>
+                </Frame>
+                     <Label Text="Gender"  TextColor="#a1b0bf"></Label>
+                <Grid ColumnDefinitions="*,*">
+                <Frame Grid.Column="0">
+                    <StackLayout  Orientation="Horizontal">
+                                  <RadioButton>
+                                      <RadioButton.Triggers>
+                                          <DataTrigger TargetType="RadioButton" Binding="{Binding  BirthandGenderObject.Gender}" Value="0">
+                                              <Setter Property="IsChecked" Value="True"></Setter>
+                                          </DataTrigger>
+                                      </RadioButton.Triggers>
+                                  </RadioButton>
+<Label Text="Male" VerticalOptions="Center"></Label>
+                  
+                    </StackLayout>
+                
+                </Frame>
+                                    <Frame Grid.Column="1">
+     <StackLayout Orientation="Horizontal">
+
+                            <RadioButton>
+                                 <RadioButton.Triggers>
+                                          <DataTrigger TargetType="RadioButton" Binding="{Binding  BirthandGenderObject.Gender}" Value="1">
+                                              <Setter Property="IsChecked" Value="True"></Setter>
+                                          </DataTrigger>
+                                      </RadioButton.Triggers>
+                            </RadioButton>
+         <Label Text="Female" VerticalOptions="Center">
+
+         </Label>
+                    </StackLayout>                </Frame>
+                </Grid>
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
